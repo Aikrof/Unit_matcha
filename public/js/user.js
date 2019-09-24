@@ -355,6 +355,14 @@ $('.user_location_remove').click(function(){
 	sender.form('/profile/removeLocation');
 });
 
+
+$('.target_block_user').click(function(){
+    let $user = {
+        login : $('.target_user_login').text(),
+    };
+
+    sender.form('/blockUser', {'user' : $user});
+});
 /*
 * Add new tag in to tags select
 */

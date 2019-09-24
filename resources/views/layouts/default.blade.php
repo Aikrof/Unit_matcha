@@ -84,18 +84,6 @@
                         <p>Settings</p>
                     </a>
                 </li>
-                <li class="@yield('maps')">
-                    <a class="nav-link" href="/maps">
-                        <i class="fa fa-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li class="@yield('notifi')">
-                    <a class="nav-link" href="/notifications">
-                        <i class="fa fa-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -119,19 +107,6 @@
                     <ul class="nav navbar-nav mr-auto">
                         <li class="dropdown nav-item">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <i class="fa fa-spinner"></i>
-                                <span class="d-lg-none">Style</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Notification 1</a>
-                                <a class="dropdown-item" href="#">Notification 2</a>
-                                <a class="dropdown-item" href="#">Notification 3</a>
-                                <a class="dropdown-item" href="#">Notification 4</a>
-                                <a class="dropdown-item" href="#">Another notification</a>
-                            </ul>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                 <i class="fa fa-envelope"></i>
                                 <span class="notification notification_count" style="display: none"></span>
                                 <span class="d-lg-none">Notification</span>
@@ -139,27 +114,14 @@
                             <ul class="dropdown-menu notification_ul">
                             </ul>
                         </li>
-                        <li class="nav-item search_btn">
-                            <div class="nav-link search-box-collapse">
+                        <li class="nav-item search_btn asdf">
+                            <div class="nav-link search-box-collapse" onclick="search_box_collapse();">
                                     <i class="fa fa-search"></i>
-                                    <span class="d-lg-block">&nbsp;Search</span>
+                                    <span class="d-lg-block asdf">&nbsp;Search</span>
                             </div>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="no-icon">Dropdown</span>
-                                </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link logout">
                                 <span class="no-icon">Log out</span>

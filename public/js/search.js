@@ -56,9 +56,10 @@
 	});
 	
 	/*--/ Navbar Collapse /--*/
-	$('.search-box-collapse').on('click', function () {
-		$('body').removeClass('box-collapse-closed').addClass('box-collapse-open');
-	});
+	// $('.search-box-collapse').on('click', function () {
+	// 	$('body').removeClass('box-collapse-closed').addClass('box-collapse-open');
+	// });
+
 	$('.close-box-collapse, .click-closed').on('click', function () {
 		$('body').removeClass('box-collapse-open').addClass('box-collapse-closed');
 		$('.menu-list ul').slideUp(700);
@@ -149,6 +150,9 @@
 
 })(jQuery);
 
+function search_box_collapse(){
+	$('body').removeClass('box-collapse-closed').addClass('box-collapse-open');
+}
 
 var europeCountry= [
 	'Austria','Albania','Andorra','Belarus','Belgium',

@@ -12,9 +12,10 @@
 <div class="container-fluid">
 @if (!empty($data))
 <div class="row mr-20">
-    <div class="col-md-6 resizable-choice">
-        <ul class="tab-group">
-            <li class="tab active"><a href="#Gallery">Gallery</a></li>
+    <div class="col-md-12 resizable-choice">
+        <ul class="list-group">
+            <li class="list-group-item col-md-6 target_block_user" style="margin-bottom: 10px;cursor: pointer;">Block User</li>
+            <li class="list-group-item col-md-6 target_fake_account" style="cursor: pointer;">Report as a fake account</li>
         </ul>
     </div>
 </div>
@@ -99,7 +100,7 @@
                 	</label>
                     <h5 class="title">{{$data['info']['first_name'] . " " . $data['info']['last_name']}}</h5>
                 </a>
-                <p class="description">{{$data['user']['login']}}</p>
+                <p class="description target_user_login">{{$data['user']['login']}}</p>
             </div>
             <p class="description text-center">
                 <span>Age: </span>{{$data['info']['age']}}

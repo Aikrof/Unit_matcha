@@ -218,6 +218,11 @@ h1 .subtitle {
 
 
 
+.pagination{
+    flex-wrap: wrap!important;
+}
+
+
 /*** FIRST ENTRY STYLESHEETS ***/
 
 #swal2-title{
