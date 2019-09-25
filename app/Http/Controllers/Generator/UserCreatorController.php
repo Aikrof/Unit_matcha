@@ -16,7 +16,7 @@ class UserCreatorController
     {
     	$index = 0;
 
-    	while(++$index < 500)
+    	while(++$index <= 500)
     	{
     		$new_user = User::create([
     			'login'=> 'user' . $index,
@@ -43,8 +43,8 @@ class UserCreatorController
 
     		Location::create([
     			'id' => $new_user->id,
-    			'latitude' => 50.4032446,
-				'longitude' => 30.5649563,
+    			'latitude' => doubleval('50.' . (float)(rand(10000000, 99999999))),
+				'longitude' => doubleval('30.' . (float)(rand(10000000, 99999999))),
 				'country' => 'Ukraine',
 				'city' => 'Kyiv',
 				'user_access' => 1,
@@ -81,20 +81,20 @@ class UserCreatorController
 
     protected static function generateRandomAbout()
     {
-    	return ('bb');
+    	return ('Bot');
     }
 
     protected static function getRandomInterests()
     {
     	$random_interest = [
-    		'UNIT' , '2019', 'aaaa', 'bbbbb', 'C', 'JS', 'VueJS', 'PHP', 'Mysql', 'asdd', '123', '321', 'ahaha', 'test', 'my_interests', 'football', 'project', 'matcha', 'printf', 'filler', 'fillit', 'get_next_line', 'camagru', 'hypertube', 
+    		'UNIT' , '2019', 'aaaa', 'bbbbb', 'C', 'JS', 'VueJS', 'PHP', 'Mysql', 'asdd', '123', '321', 'ahaha', 'test', 'my_interests', 'football', 'project', 'matcha', 'printf', 'filler', 'fillit', 'get_next_line', 'camagru', 'hypertube', 'nefiga', 'ataka klonov', 'ddos', 'wtf', 'epick', 'L2'
     	];
 
-    	$i = rand(2,12);
+    	$i = rand(1,14);
     	$arr = [];
     	while (--$i)
     	{
-    		$rand = rand(0, 23);
+    		$rand = rand(0, 28);
     		array_push($arr, $random_interest[$rand]);
     	}
 

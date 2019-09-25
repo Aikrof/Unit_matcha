@@ -11,6 +11,21 @@ use Illuminate\Http\Request;
 
 class BlockController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Block Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for block users
+    |
+    */
+
+    /**
+    * Blocking target user
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json array $user
+    */
     public function blockUser(Request $request)
     {
     	$this->validateUserLogin($request->user);
@@ -41,6 +56,12 @@ class BlockController extends Controller
     	]));
     }
 
+    /**
+    * Removing target user from block
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json array $user
+    */
     public function removeUserFromBLock(Request $request)
     {
 
@@ -69,6 +90,12 @@ class BlockController extends Controller
         return (json_encode(['user' => ['login' => $user->login]]));
     }
 
+    /**
+    * Validate target user login
+    *
+    * @param  array $user
+    * @return json array $data || void
+    */
     protected function validateUserLogin(array $user)
     {
     	$validation = Validator::make($user, [

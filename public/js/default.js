@@ -1,12 +1,18 @@
 
-var socket = new WebSocket("ws://"+ location.hostname +":6322");
+var socket = new WebSocket("ws://"+ location.hostname +":6333");
 
 socket.onopen = function(open){
 	socket.send(JSON.stringify({'type' : 'notification'}))
 };
 
 function sendMsg($data){
-	socket.send(JSON.stringify($data));
+	if (!socket.connected){
+		setTimeout(()=>{
+			socket.send(JSON.stringify($data));
+		},1500);
+	}
+	else
+		socket.send(JSON.stringify($data));
 }
 
 socket.onmessage = function(event){
@@ -89,31 +95,23 @@ socket.onmessage = function(event){
 						}
 						break;
 					}
-				}
-
-				let $repetitive = $('.notification_login:contains('+ result.login +')')
-
-				if ($repetitive.hasClass('notification_login') &&
-					$repetitive.parent().attr('data-type') === result.type){
-
-					let $small = $repetitive.parent().find('.small_n_count');
-					
-					if ($small.text() === ""){
-						$small.text("2");
+					case 'follow':{
+						result = {
+							'type' : 'follow',
+							'str' : "You have new follow by user: ",
+							'login' : n.login,
+						}
 					}
-					else
-						$small.text(parseInt($small.text()) + 1);
 				}
-				else{
-					$('.notification_ul').append(
-						'<p class="dropdown-item notification_p" data-type="'+ result.type +'">\
-						<span class="n_count"><small class="small_n_count"></small></span>'
-						+ result.str +
-						'<strong class="notification_login c-e74">'
-						+ result.login +
-						'</strong><input type="hidden" value="'+ result.str +'"></p>'
-					);
-				}
+
+				$('.notification_ul').append(
+					'<p class="dropdown-item notification_p" data-type="'+ result.type +'">\
+					<span class="n_count"><small class="small_n_count"></small></span>'
+					+ result.str +
+					'<strong class="notification_login c-e74">'
+					+ result.login +
+					'</strong><input type="hidden" value="'+ result.str +'"></p>'
+				);
 			}
 
 			$('.notification_count').show();
@@ -186,10 +184,18 @@ function pushNewAlert(data){
   						now chat is unavailable.\
   					</p>');
 			}
+			case 'follow': {
+				return ('\
+					<p class="notify_p">\
+						You have new follow by user:</p>\
+  						<p class="notify_p notify_username c-e74">'
+  						+ data.from +
+  					'</p>');
+			}
 		}
 	}
 }
 
-$('.logout').click(function(){
+function logout(){
 	sender.form('/logout');
-});
+}

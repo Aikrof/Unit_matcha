@@ -47,7 +47,7 @@
                         <div class="col">
                             <div class="my-0 chat_header">
                                 <b class="c-e74" style="font-size: 21px;"></b>
-                                <label><small>last seen Feb 18 2017</small></label>
+                                <label><small class="small_online"></small></label>
                             </div>
                         </div>
                     </div>

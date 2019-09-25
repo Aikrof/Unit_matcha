@@ -13,9 +13,9 @@ class ParseOnlineHelper
 
             $carbon_minute = Carbon::now()->format('i');
             $online_minute = Carbon::createFromFormat('Y-m-d H:i:s', $online)->format('i');
+
             return (
-                ($carbon_minute - $online_minute > 5) ?
-                'Online' : 'Last seen ' . Carbon::createFromFormat('Y-m-d H:i:s', $online)->format('H:i')
+                ($carbon_minute - $online_minute <= 5) ? 'Online' : 'Last seen ' . Carbon::createFromFormat('Y-m-d H:i:s', $online)->format('H:i')
             );
         }
         else{

@@ -14,8 +14,9 @@ class CreateFakeAccountsTable extends Migration
     public function up()
     {
         Schema::create('fake_accounts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->bigInteger('report_user_id');
+            $table->bigInteger('fake_user_id');
         });
     }
 

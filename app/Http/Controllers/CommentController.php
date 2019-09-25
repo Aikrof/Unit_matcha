@@ -11,6 +11,22 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comment Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for users comments
+    |
+    */
+
+    /**
+    * Add new comment by target image
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json notification array $data
+    */
     public function addComment(Request $request)
     {
     	if (empty($request->comment['comment']))
@@ -47,6 +63,12 @@ class CommentController extends Controller
     	exit(json_encode($data));
     }
 
+    /**
+    * Get all comments by target image
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json notification array $data
+    */
     public function getComments(Request $request)
     {
     	$comments = DB::select('SELECT * FROM `comments` WHERE `img` = "' . $request->commentImg . '"');

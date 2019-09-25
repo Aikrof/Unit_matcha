@@ -6,5 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class FakeAccount extends Model
 {
-    //
+ 	/**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const CREATED_AT = null;
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = null;
+
+    protected $primaryKey = 'to_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'report_user_id', 'fake_user_id'
+    ];   
 }

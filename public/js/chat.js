@@ -38,11 +38,13 @@ $('.list-group-item').click(function(){
         $('.message-scroll').children().remove();
         
         if (request.data){
-            for (let data of request.data){
+            for (let data of request.data.user_msg){
                 $('.message-scroll').append(
                     printMessage(data)
                 );
             }
+
+            $('.small_online').text(request.data.online.user_online);
         }
         
         $elem.addClass('active');

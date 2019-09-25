@@ -9,6 +9,10 @@
 <!-- CONTENT -->
 @section('content')
 
+@if (!empty($follow_id))
+    <input class="follow_notifi" type="hidden" name="follow" value="{{$follow_id}}">
+@endif
+
 <div class="container-fluid">
 @if (!empty($data))
 <div class="row mr-20">

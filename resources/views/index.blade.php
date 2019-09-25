@@ -172,6 +172,14 @@
                     <label>Distance</label>
                     <span>{{number_format((float)$user->distance, 2, '.', '')}}</span><span> Km.</span>
                 </div>
+                <div>
+                    <label>Gender:</label>
+                    <span>{{$user->gender}}</span>
+                </div>
+                <div>
+                    <label>Orientation:</label>
+                    <span>{{$user->orientation}}</span>
+                </div>
                 @endif
             </div>
             </div>
@@ -179,7 +187,7 @@
                 @if (!empty($user->tags))
                 <label>Interests: </label>
                     @foreach ($user->tags as $tag)
-                        <p class="tag_for">#{{$tag}}</p>
+                        <p class="tag_for mb-4">#{{$tag}}</p>
                     @endforeach
                 @endif
             </div>

@@ -8,6 +8,17 @@ $('.tab a').click(function(){
     $($target).fadeIn(600);
 });
 
+(function(){
+    if ($('.follow_notifi') !== undefined){
+        $data = {
+            'type' : 'newNotification',
+            'to_id' : $('.follow_notifi').val(),
+            'action' : 'follow',
+        }
+
+        sendMsg($data);
+    }
+}());
 
 birthday = {};
 
@@ -356,13 +367,60 @@ $('.user_location_remove').click(function(){
 });
 
 
+
+(function(){
+
 $('.target_block_user').click(function(){
     let $user = {
         login : $('.target_user_login').text(),
     };
 
-    sender.form('/blockUser', {'user' : $user});
+    sender.form('/blockUser', {'user' : $user}, function (request){
+        if (request.user){
+            success_block_fake('User was blocked successfully.');
+        }
+        else{
+            err_block_fake('User is not exist');
+        }
+    });
 });
+$('.target_fake_account').click(function(){
+    let $user = {
+        login : $('.target_user_login').text(),
+    };
+
+    sender.form('/fakeAccount', {'user': $user}, function(request){
+        if (request.success){
+            success_block_fake(request.success);
+        }
+        else{
+            err_block_fake(request.err);
+        }
+    });
+});
+
+    function success_block_fake(msg){
+        Swal.fire({
+            type: 'success',
+            title: '<h3 class="swal-ress_suc">' + msg + '</h3>',
+            showCloseButton: true,
+            showCancelButton: false,
+            reverseButtons: true,
+            timer: 3500,
+        });
+    }
+
+    function err_block_fake(msg){
+        Swal.fire({
+            type: 'error',
+            title: '<h3 class="swal-ress_err">' + msg + '</h3>',
+            showCloseButton: true,
+            showCancelButton: false,
+            reverseButtons: true,
+            timer: 3500,
+        });
+    }
+}());
 /*
 * Add new tag in to tags select
 */

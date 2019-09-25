@@ -127,6 +127,15 @@
   right: 4.2857rem;
 }
 
+@media(max-width: 450px){
+  .right-boxed {
+    right: 1rem;
+  }
+  .title-box-d .title-d{
+    font-size: 1.6rem;
+  }
+}
+
 .form-a select.form-control-lg:not([size]):not([multiple]) {
   height: 3.5rem;
 }

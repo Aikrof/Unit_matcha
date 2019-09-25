@@ -115,7 +115,7 @@ class WebSocketController implements MessageComponentInterface
      */
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
-        echo $e->getMessage() . '\n';
+        // echo $e->getMessage() . '\n';
         // $userId = $conn->session->get(Auth::getName());
         // echo "An error has occurred with user $userId: {$e->getMessage()}\n";
         unset($this->clients[$conn->resourceId]);
@@ -195,7 +195,7 @@ class WebSocketController implements MessageComponentInterface
             ]);
         }
 
-        // Notifi::where('to_id', $id)->delete();
+        Notifi::where('to_id', $id)->delete();
 
         $from->send(
             json_encode([

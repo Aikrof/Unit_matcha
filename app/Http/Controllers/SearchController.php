@@ -135,7 +135,7 @@ class SearchController extends Controller
     			->join('locations', 'locations.id', '=', 'users.id')
                 ->join('infos', 'infos.id', '=',  'users.id')
                 ->join('interests', 'interests.id', '=',  'users.id')
-    			->select('users.id', 'users.online','infos.icon', 'users.login', 'infos.age', 'users.rating', 'infos.first_name', 'infos.last_name', 'infos.about', 'interests.tags', 'locations.latitude', 'locations.longitude', 'locations.country', 'locations.city', 'locations.user_access')
+    			->select('users.id', 'users.online', 'infos.gender', 'infos.orientation', 'infos.icon', 'users.login', 'infos.age', 'users.rating', 'infos.first_name', 'infos.last_name', 'infos.about', 'interests.tags', 'locations.latitude', 'locations.longitude', 'locations.country', 'locations.city', 'locations.user_access')
     			->get()
     	);
     }

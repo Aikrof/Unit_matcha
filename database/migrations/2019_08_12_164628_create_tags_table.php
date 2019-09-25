@@ -17,7 +17,7 @@ class CreateTagsTable extends Migration
             $table->engine = 'InnoDB';
             $table->bigInteger('count');
             $table->string('tag', 100);
-            $table->string('users_id');
+            $table->text('users_id');
         });
     }
 

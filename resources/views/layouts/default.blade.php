@@ -123,7 +123,7 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link logout">
+                            <a class="nav-link logout" onclick="logout();">
                                 <span class="no-icon">Log out</span>
                             </a>
                         </li>
@@ -152,12 +152,12 @@
     <script src="js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
     <script src="js/core/popper.min.js" type="text/javascript"></script>
     <script src="js/core/bootstrap.min.js" type="text/javascript"></script>
+     <!-- DEFAULT -->
+    <script type="text/javascript" src="js/default.js"></script>
     <!-- TEMPL SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <!-- HELPER -->
     <script type="text/javascript" src="js/helper.js"></script>
-    <!-- DEFAULT -->
-    <script type="text/javascript" src="js/default.js"></script>
     <!-- Control Center for Light Bootstrap Dashboard: scripts -->
     <script src="js/light-bootstrap-default.js" type="text/javascript"></script>
      <!--SEARCH -->

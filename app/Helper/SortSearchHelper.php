@@ -25,33 +25,82 @@ class SortSearchHelper
     */
     public static function sortData(Collection $query, $params)
     {
+
+
     	$sort = self::validateSortParams($params);
 
-        if (!empty($sort['tags']))
+        if (!empty($sort['tags'])){
             self::addInterestsMatch($query, $sort['tags']);
+            $check = false;
+        }
+        else{
+            $check = true;
+        }
 
         return (
         	$sort['sorted_by'] === 'ASC' ?
-        	self::sortAsc($query, $sort) :
-        	self::sortDesc($query, $sort)
+        	self::sortAsc($query, $sort, $check) :
+        	self::sortDesc($query, $sort, $check)
         );
     }
 
-    public static function sortAsc(Collection $query, array $sort)
+    public static function sortAsc(Collection $query, array $sort, int $check)
     {
-    	return (
-    		$query->sortBy($sort['priority'])
-    			->sortByDesc('interests_matched')
-    	);
-
+        if ($check){
+            return (
+                $query->sortBy($sort['priority'])
+            );
+        }
+        else{
+            return (
+                $query = $query->sort(function($a, $b) use ($sort) {
+                    if ($a->interests_matched == $b->interests_matched)
+                    {
+                        if ($a->{$sort['priority']} == $b->{$sort['priority']})
+                            return 0;
+                        if ($a->{$sort['priority']} > $b->{$sort['priority']})
+                            return 1;
+                        if ($a->{$sort['priority']} < $b->{$sort['priority']})
+                            return -1;
+    
+                    }
+                    if ($a->interests_matched > $b->interests_matched)
+                        return -1;
+                    if ($a->interests_matched < $b->interests_matched)
+                        return 1;
+                })
+            );
+        }
     }
 
-    public static function sortDesc(Collection $query, array $sort)
+    public static function sortDesc(Collection $query, array $sort, int $check)
     {
-    	return (
-    		$query->sortByDesc($sort['priority'])
-    			->sortBy('interests_matched')
-    	);
+        if ($check){
+            return (
+                $query->sortByDesc($sort['priority'])
+            );
+        }
+
+    	else{
+            return (
+                $query = $query->sort(function($a, $b) use ($sort) {
+                    if ($a->interests_matched == $b->interests_matched)
+                    {
+                        if ($a->{$sort['priority']} == $b->{$sort['priority']})
+                            return 0;
+                        if ($a->{$sort['priority']} > $b->{$sort['priority']})
+                            return -1;
+                        if ($a->{$sort['priority']} < $b->{$sort['priority']})
+                            return 1;
+    
+                    }
+                    if ($a->interests_matched > $b->interests_matched)
+                        return -1;
+                    if ($a->interests_matched < $b->interests_matched)
+                        return 1;
+                })
+            );
+        }
     }
 
     /**
@@ -71,6 +120,19 @@ class SortSearchHelper
                 $count = 0;
 
             $value->interests_matched = $count;
+        }
+    }
+
+    /**
+    * Add count of interests match
+    *
+    * @param  Illuminate\Support\Collection $params
+    * @return void
+    */
+    protected static function setNullInterestsMatch(Collection &$query)
+    {
+        foreach ($query as $value){
+            $value->interests_matched = 0;
         }
     }
 

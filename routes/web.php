@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 	Route::post('/user/getCountLikes', 'LikeController@getCountLikes');
 	Route::post('/user/getLikes', 'LikeController@getLikes');
 	Route::post('/user/addLike', 'LikeController@addLike');
+
+	Route::post('/fakeAccount', 'FakeAccountController@fakeAccount');
 });
 
 Route::group(['as' => 'landing','prefix' => 'landing', 'namespace' => 'Auth'], function(){

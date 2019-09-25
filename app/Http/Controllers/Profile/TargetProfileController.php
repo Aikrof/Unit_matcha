@@ -47,6 +47,7 @@ class TargetProfileController extends ProfileController
         ]);
         
     	$data = $this->createArrInfo($id, $login);
-    	return (view('target_profile')->with('data', $data));
+
+    	return (view('target_profile')->with('data', $data)->with('follow_id', $select->id));
     }
 }

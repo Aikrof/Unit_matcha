@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Like Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for users likes
+    |
+    */
+
+    /**
+    * Get count of image likes
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json count likes
+    */
     public function getCountLikes(Request $request)
     {
         exit (json_encode(
@@ -20,6 +35,12 @@ class LikeController extends Controller
         ));
     }
 
+    /**
+    * Get users data who likes image
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json array $data
+    */
     public function getLikes(Request $request)
     {
         $likes = Likes::where('img', $request->img)->get();
@@ -44,6 +65,12 @@ class LikeController extends Controller
         exit (json_encode(['data' => $data]));
     }
 
+    /**
+    * Add new like of remove like
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return array array remove && array notification 
+    */
     public function addLike(Request $request)
     {
     	$target_id = (int)base64_decode($request->like['id']);
@@ -98,6 +125,12 @@ class LikeController extends Controller
         }
     }
 
+    /**
+    * Check if user liked this image early
+    *
+    * @param  string $img, int $user_id
+    * @return boolean
+    */
     private function checkIfUserLike(string $img, int $user_id)
     {
         $likes = Likes::where('img', $img)->where('id', $user_id)->first();

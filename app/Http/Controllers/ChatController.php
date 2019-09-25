@@ -7,10 +7,26 @@ use App\User;
 use App\Room;
 use App\Chat;
 use Carbon\Carbon;
+use App\Helper\ParseOnlineHelper;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Chat Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for chat
+    |
+    */
+
+    /**
+    * Chat view
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return view 'chat.blade.php'
+    */
     public function chat(Request $request)
     {
     	$title = 'Matcha :: Chat';
@@ -48,6 +64,12 @@ class ChatController extends Controller
     	return (view('chat')->with('data', $data)->with('title', $title));
     }
 
+    /**
+    * Get all messages with target user
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json array $data
+    */
     public function getMessages(Request $request)
     {
     	$user = User::where('login', $request->data['login'])
@@ -63,18 +85,26 @@ class ChatController extends Controller
 
     	$chat = Chat::where('room_id', $room['room_id'])->get();
 
-    	$data = [];
+    	$data['user_msg'] = [];
     	foreach ($chat as $msgs){
-    		array_push($data, [
+    		array_push($data['user_msg'], [
     			'user' => $msgs->user_id == $request->user()->id ? 'auth' : 'target',
     			'msg' => $msgs->msg,
                 'time' => self::getMessageTime($msgs->time_sending),
     		]);
     	}
+        
+        $data['online'] = ['user_online' => ParseOnlineHelper::getUserOnline($user->online)];
 
     	return (json_encode(['data' => $data]));
     }
 
+    /**
+    * Get time when message was sent
+    *
+    * @param  string $time
+    * @return string $time
+    */
     protected static function getMessageTime($time)
     {
         if (Carbon::now()->format('Y-m-d') ===

@@ -216,7 +216,9 @@ h1 .subtitle {
     color: #330000;
 }
 
-
+.mb-4{
+    margin: 0 6px 4px 0!important;
+}
 
 .pagination{
     flex-wrap: wrap!important;
@@ -1077,6 +1079,7 @@ h1 .subtitle {
     cursor: pointer;
     font-weight: bold;
 }
+
 .gap_for{
     height: 30px;
     background-color: rgba(203, 203, 210, 0.15);
