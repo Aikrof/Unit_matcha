@@ -18,6 +18,21 @@ use Illuminate\Support\Collection;
 
 class SearchController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Search Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for users search
+    |
+    */
+
+    /**
+    * Search users
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Support\Collection $data
+    */
     public function search(Request $request)
     {
         $query = self::supplementUserInfo(
@@ -38,7 +53,14 @@ class SearchController extends Controller
 		return (view('index', ['section' => 'home','data' => $data, 'param' => $request->all(), 'paginate' => $data]));
     }
 
-
+    /**
+    * Complements standard user data from tables
+    *
+    * @param  \Illuminate\Support\Collection $data
+    * @param array $user_location
+    * @param array $sort
+    * @return \Illuminate\Support\Collection $data
+    */
     protected static function supplementUserInfo(Collection $query, $user_location, $sort)
     {
         $range = new RangeHelper();
@@ -71,6 +93,12 @@ class SearchController extends Controller
         return ($query);
     }
 
+    /**
+    * Validate the user search data
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $data
+    */
     protected static function validateSearchRequest(array $search = null)
     {
     	$info = Info::find(Auth::user()->id);
@@ -96,6 +124,12 @@ class SearchController extends Controller
     	return ($query);
     }
 
+    /**
+    * Get search priority from request
+    *
+    * @param  array $search
+    * @return array $data || null
+    */
     private static function getSearchPriority(array $search = null)
     {
     	if (!empty($search['login']))
@@ -111,6 +145,12 @@ class SearchController extends Controller
     		return (null);
     }
 
+    /**
+    * Get search data
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection
+    */
     protected static function getSearchQuery(array $search)
     {
 
@@ -124,6 +164,12 @@ class SearchController extends Controller
     		return (self::defaultSearch($search));
     }
 
+    /**
+    * Get user by login
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $collection
+    */
     protected static function searchByLogin(array $search)
     {
     	if (strtolower($search['login']) === strtolower(Auth::user()->login))
@@ -140,6 +186,12 @@ class SearchController extends Controller
     	);
     }
 
+    /**
+    * Get users by interests tags
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $collection
+    */
     protected static function searchByTags(array $search)
     {
     	$tags = array_filter(array_unique(explode(',', $search['tags'])));
@@ -172,6 +224,12 @@ class SearchController extends Controller
     	return ($collection);
     }
 
+    /**
+    * Get users by location
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $collection
+    */
     protected static function searchByLocation(array $search)
     {
     	$search_key = empty($search['city']) ? 'country' : 'city';
@@ -189,6 +247,12 @@ class SearchController extends Controller
     	return (self::parseQuery($query, $search));
     }
 
+    /**
+    * Get users by default(by range location and same tags)
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $collection
+    */
     protected static function defaultSearch(array $search)
     {
     	$query = DB::table('infos')
@@ -223,6 +287,12 @@ class SearchController extends Controller
     	return (self::parseQuery($query, $search));
     }
 
+    /**
+    * Get user data by id
+    *
+    * @param  array $search
+    * @return \Illuminate\Support\Collection $collection
+    */
     protected static function getUserById(int $id)
     {
     	return (
@@ -236,6 +306,13 @@ class SearchController extends Controller
     	);
     }
 
+    /**
+    * Parse query from table to filter unavalible users
+    *
+    * @param  \Illuminate\Support\Collection $query
+    * @param array $search
+    * @return \Illuminate\Support\Collection $query
+    */
     private static function parseQuery(Collection $query, array $search)
     {
     	foreach ($query as $key => $value){
@@ -246,6 +323,13 @@ class SearchController extends Controller
     	return ($query);
     }
 
+    /**
+    * Check if user are in block list of auth user
+    *
+    * @param Object $value
+    * @param array $search
+    * @return boolean
+    */
     private static function filterQuery($value, array $search)
     {
         if (!empty(BlockedUser::where('user_id', Auth::user()->id)->where('blocked_user_id', $value->id)->first()))

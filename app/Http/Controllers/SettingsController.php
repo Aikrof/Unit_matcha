@@ -13,6 +13,21 @@ use Illuminate\Support\Collection;
 
 class SettingsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Settings Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for users settings like change login, password, email and block another users
+    |
+    */
+
+    /**
+    * Show the settings page
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return view
+    */
     public function viewSettings(Request $request)
     {
     	$title = 'Matcha :: Settings';
@@ -33,6 +48,12 @@ class SettingsController extends Controller
         return (view('settings', ['title' => $title,'data' => $data, 'param' => $request->all(), 'paginate' => $data]));
     }
 
+    /**
+    * Change user login
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json boolean
+    */
     public function changeLogin(Request $request)
     {
     	$this->validateData($request);
@@ -56,6 +77,12 @@ class SettingsController extends Controller
     	return (json_encode(['changed' => true]));
     }
 
+    /**
+    * Change user password
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json boolean
+    */
     public function changePassword(Request $request)
     {
     	$this->validateData($request);
@@ -78,6 +105,12 @@ class SettingsController extends Controller
     	return (json_encode(['changed' => true]));
     }
 
+    /**
+    * Validate user data from request
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json error message || void
+    */
     protected function validateData(Request $request)
     {
     	if (!empty($request->new_login))
@@ -108,7 +141,7 @@ class SettingsController extends Controller
 
         	$data = $request->new_email;
     	}
-
+        
         if ($validation->fails())
         {
             die(

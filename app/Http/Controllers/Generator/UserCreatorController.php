@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UserCreatorController
 {
+    /*
+    |--------------------------------------------------------------------------
+    | User Creator Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for creating users to bd_matcha
+    |
+    */
+
+    /**
+    * Create fake accounts and fill them
+    */
     public function create()
     {
     	$index = 0;
@@ -67,6 +79,11 @@ class UserCreatorController
     	}
     }
 
+    /**
+     * Get user random orientation
+     *
+     * @return String orientation
+     */
     protected static function getRandOrientation()
     {
     	$rand = rand(1, 3);
@@ -79,15 +96,25 @@ class UserCreatorController
     		return ('Homosexual');
     }
 
+    /**
+     * Get user about info
+     *
+     * @return String about
+     */
     protected static function generateRandomAbout()
     {
     	return ('Bot');
     }
 
+    /**
+     * Get user random interests
+     *
+     * @return String interests
+     */
     protected static function getRandomInterests()
     {
     	$random_interest = [
-    		'UNIT' , '2019', 'aaaa', 'bbbbb', 'C', 'JS', 'VueJS', 'PHP', 'Mysql', 'asdd', '123', '321', 'ahaha', 'test', 'my_interests', 'football', 'project', 'matcha', 'printf', 'filler', 'fillit', 'get_next_line', 'camagru', 'hypertube', 'nefiga', 'ataka klonov', 'ddos', 'wtf', 'epick', 'L2'
+    		'UNIT' , '2019', 'aaaa', 'bbbbb', 'C', 'JS', 'VueJS', 'PHP', 'Mysql', 'asdd', '123', '321', 'ahaha', 'test', 'my_interests', 'football', 'project', 'matcha', 'printf', 'filler', 'fillit', 'get_next_line', 'camagru', 'hypertube', 'ddos', 'wtf', 'sex'
     	];
 
     	$i = rand(1,14);

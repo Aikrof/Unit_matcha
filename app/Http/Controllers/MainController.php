@@ -9,9 +9,20 @@ use Illuminate\Http\Request;
 
 class MainController extends SearchController
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Main Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for index page
+    |
+    */
+
 	/**
      * Show the index page.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

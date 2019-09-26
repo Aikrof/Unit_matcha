@@ -35,6 +35,13 @@ class UserProfileController extends ProfileController
     	return (view('user_profile')->with('data', $data));
     }
 
+    /**
+    * Update user profile by request data
+    *
+    * @param  \Illuminate\Http\Request  $request
+    *
+    * @return void
+    */
     public function updateProfile(Request $request)
     {
         $key = key($request->all());
@@ -57,6 +64,13 @@ class UserProfileController extends ProfileController
         $user->save();
     }
 
+    /**
+    * Remove birthday by request data
+    *
+    * @param  \Illuminate\Http\Request  $request
+    *
+    * @return void
+    */
     public function removeBirthday(Request $request)
     {
         $birthday = Birthday::find($request->user()->id);
@@ -71,6 +85,13 @@ class UserProfileController extends ProfileController
         $birthday->save();
     }
 
+    /**
+    * Remove user interest tag by tag from request
+    *
+    * @param  \Illuminate\Http\Request  $request
+    *
+    * @return void
+    */
     public function removeTag(Request $request)
     {
         $interests = Interests::find($request->user()->id);
@@ -103,6 +124,13 @@ class UserProfileController extends ProfileController
         exit;
     }
 
+    /**
+    * Remove user location
+    *
+    * @param  \Illuminate\Http\Request  $request
+    *
+    * @return void
+    */
     public function removeLocation(Request $request)
     {
 
@@ -118,7 +146,14 @@ class UserProfileController extends ProfileController
         exit;
     }
 
-
+    /**
+    * Update user birthday by request data
+    *
+    * @param  array data
+    * @param  int $user_id
+    *
+    * @return void
+    */
     protected function updateBirthday(array $data, int $user_id)
     {
         if (empty($data['birthday']))
@@ -136,6 +171,14 @@ class UserProfileController extends ProfileController
         $birthday->save();
     }
 
+    /**
+    * Update user location by request data
+    *
+    * @param  array data
+    * @param  int $user_id
+    *
+    * @return void
+    */
     protected function updateLocation(array $data, int $user_id)
     {
         ProfileRating::addToRating($user_id, 'location');
@@ -150,6 +193,14 @@ class UserProfileController extends ProfileController
         $location->save();
     }
 
+    /**
+    * Update user interest tags by request data
+    *
+    * @param  array data
+    * @param  int $user_id
+    *
+    * @return void
+    */
     protected function updateInterests(array $data, int $user_id)
     {
         $newTag = $data['interests'][0];
@@ -176,6 +227,15 @@ class UserProfileController extends ProfileController
 
     }
 
+    /**
+    * Update user info
+    *
+    * @param  array data
+    * @param  String $key
+    * @param  int $user_id
+    *
+    * @return void
+    */
     protected function updateInfo(array $data, string $key, int $user_id)
     {
         if (($key === 'about' || $key === 'age') && empty($data[$key]))

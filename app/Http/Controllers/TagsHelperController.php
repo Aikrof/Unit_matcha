@@ -16,6 +16,12 @@ class TagsHelperController extends Controller
     |
     */
 
+    /**
+    * Return similar tags
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return json array $similar
+    */
     public function tagWriter(Request $request)
     {
         if (empty($request->tag))
@@ -24,6 +30,12 @@ class TagsHelperController extends Controller
     	exit(json_encode(['similar' => $this->searchSimilarTags($request->tag)]));
     }
 
+    /**
+    * Search for similar tags in table
+    *
+    * @param  String $tags
+    * @return stdClass
+    */
     private function searchSimilarTags($tags)
     {
 		return (
